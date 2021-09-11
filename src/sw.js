@@ -1,4 +1,4 @@
-var CACHE_NAME = '2021-07-18 15:25';
+var CACHE_NAME = '2021-09-12 08:36';
 var urlsToCache = [
   '/pronounce-dojo/',
   '/pronounce-dojo/0.csv',
@@ -13,7 +13,7 @@ var urlsToCache = [
   '/pronounce-dojo/mp3/correct3.mp3',
   '/pronounce-dojo/favicon/original.svg',
   'https://marmooo.github.io/fonts/textar-light.woff2',
-  'https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css',
+  'https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css',
 ];
 
 self.addEventListener('install', function(event) {
