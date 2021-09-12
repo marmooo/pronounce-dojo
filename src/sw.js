@@ -1,4 +1,4 @@
-var CACHE_NAME = '2021-09-12 11:05';
+var CACHE_NAME = '2021-09-12 11:30';
 var urlsToCache = [
   '/pronounce-dojo/',
   '/pronounce-dojo/0.csv',
