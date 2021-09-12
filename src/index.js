@@ -1,4 +1,4 @@
-const gameTime = 180;
+const gameTime = 120;
 let endAudio, incorrectAudio, correctAudio;
 loadAudios();
 const AudioContext = window.AudioContext || window.webkitAudioContext;
@@ -240,6 +240,12 @@ function searchByGoogle(event) {
   return false;
 }
 
+function scoring() {
+  playPanel.classList.add('d-none');
+  scorePanel.classList.remove('d-none');
+  document.getElementById('correct').textContent = correctCount;
+  document.getElementById('total').textContent = correctCount + incorrectCount;
+}
 
 let gameTimer;
 function startGameTimer() {
@@ -254,10 +260,7 @@ function startGameTimer() {
     } else {
       clearInterval(gameTimer);
       playAudio(endAudio);
-      playPanel.classList.add('d-none');
-      scorePanel.classList.remove('d-none');
-      document.getElementById('correct').textContent = correctCount;
-      document.getElementById('total').textContent = correctCount + incorrectCount;
+      scoring();
     }
   }, 1000);
 }
