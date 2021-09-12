@@ -1,3 +1,4 @@
+const gameTime = 180;
 let endAudio, incorrectAudio, correctAudio;
 loadAudios();
 const AudioContext = window.AudioContext || window.webkitAudioContext;
@@ -244,7 +245,7 @@ let gameTimer;
 function startGameTimer() {
   clearInterval(gameTimer);
   const timeNode = document.getElementById('time');
-  timeNode.innerText = '180秒 / 180秒';
+  timeNode.innerText = gameTime + '秒 / ' + gameTime + '秒';
   gameTimer = setInterval(function() {
     const arr = timeNode.innerText.split('秒 /');
     const t = parseInt(arr[0]);
