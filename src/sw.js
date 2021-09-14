@@ -14,6 +14,7 @@ var urlsToCache = [
   "/pronounce-dojo/favicon/original.svg",
   "https://marmooo.github.io/fonts/textar-light.woff2",
   "https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css",
+  "https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css",
 ];
 
 self.addEventListener("install", function (event) {
