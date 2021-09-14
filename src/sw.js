@@ -1,55 +1,54 @@
-var CACHE_NAME = '2021-09-12 11:30';
+var CACHE_NAME = "2021-09-14 09:20";
 var urlsToCache = [
-  '/pronounce-dojo/',
-  '/pronounce-dojo/0.csv',
-  '/pronounce-dojo/1.csv',
-  '/pronounce-dojo/2.csv',
-  '/pronounce-dojo/3.csv',
-  '/pronounce-dojo/4.csv',
-  '/pronounce-dojo/5.csv',
-  '/pronounce-dojo/index.js',
-  '/pronounce-dojo/mp3/end.mp3',
-  '/pronounce-dojo/mp3/incorrect1.mp3',
-  '/pronounce-dojo/mp3/correct3.mp3',
-  '/pronounce-dojo/favicon/original.svg',
-  'https://marmooo.github.io/fonts/textar-light.woff2',
-  'https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css',
+  "/pronounce-dojo/",
+  "/pronounce-dojo/index.js",
+  "/pronounce-dojo/data/0.csv",
+  "/pronounce-dojo/data/1.csv",
+  "/pronounce-dojo/data/2.csv",
+  "/pronounce-dojo/data/3.csv",
+  "/pronounce-dojo/data/4.csv",
+  "/pronounce-dojo/data/5.csv",
+  "/pronounce-dojo/mp3/end.mp3",
+  "/pronounce-dojo/mp3/incorrect1.mp3",
+  "/pronounce-dojo/mp3/correct3.mp3",
+  "/pronounce-dojo/favicon/original.svg",
+  "https://marmooo.github.io/fonts/textar-light.woff2",
+  "https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css",
 ];
 
-self.addEventListener('install', function(event) {
+self.addEventListener("install", function (event) {
   event.waitUntil(
     caches
-    .open(CACHE_NAME)
-    .then(function(cache) {
-      return cache.addAll(urlsToCache);
-    })
+      .open(CACHE_NAME)
+      .then(function (cache) {
+        return cache.addAll(urlsToCache);
+      }),
   );
 });
 
-self.addEventListener('fetch', function(event) {
+self.addEventListener("fetch", function (event) {
   event.respondWith(
     caches.match(event.request)
-      .then(function(response) {
+      .then(function (response) {
         if (response) {
           return response;
         }
         return fetch(event.request);
-      }
-    )
+      }),
   );
 });
 
-self.addEventListener('activate', function(event) {
+self.addEventListener("activate", function (event) {
   var cacheWhitelist = [CACHE_NAME];
   event.waitUntil(
-    caches.keys().then(function(cacheNames) {
+    caches.keys().then(function (cacheNames) {
       return Promise.all(
-        cacheNames.map(function(cacheName) {
+        cacheNames.map(function (cacheName) {
           if (cacheWhitelist.indexOf(cacheName) === -1) {
             return caches.delete(cacheName);
           }
-        })
+        }),
       );
-    })
+    }),
   );
 });
