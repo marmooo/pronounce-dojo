@@ -132,8 +132,10 @@ function resizeFontSize(node) {
     return [maxWidth, fontSize * lines.length * lineHeight];
   }
   function getPaddingRect(style) {
-    const width = parseFloat(style.paddingLeft) + parseFloat(style.paddingRight);
-    const height = parseFloat(style.paddingTop) + parseFloat(style.paddingBottom);
+    const width = parseFloat(style.paddingLeft) +
+      parseFloat(style.paddingRight);
+    const height = parseFloat(style.paddingTop) +
+      parseFloat(style.paddingBottom);
     return [width, height];
   }
   const style = getComputedStyle(node);
@@ -190,13 +192,15 @@ function nextProblem() {
 
 function initProblems() {
   const grade = document.getElementById("grade").selectedIndex;
-  fetch("data/" + grade + ".csv").then((response) => response.text()).then((csv) => {
-    problems = [];
-    csv.split("\n").forEach((line) => {
-      if (!line) return;
-      problems.push(line.split(","));
-    });
-  });
+  fetch("data/" + grade + ".csv").then((response) => response.text()).then(
+    (csv) => {
+      problems = [];
+      csv.split("\n").forEach((line) => {
+        if (!line) return;
+        problems.push(line.split(","));
+      });
+    },
+  );
 }
 initProblems();
 
@@ -270,6 +274,9 @@ function countdown() {
       playPanel.classList.remove("d-none");
       correctCount = incorrectCount = 0;
       startGameTimer();
+      document.getElementById("searchButton").classList.add(
+        "animate__heartBeat",
+      );
     }
   }, 1000);
 }
