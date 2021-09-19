@@ -15,7 +15,7 @@ parseFloat(style.paddingRight);const height=parseFloat(style.paddingTop)+
 parseFloat(style.paddingBottom);return[width,height];}
 const style=getComputedStyle(node);const font=style.fontFamily;const fontSize=parseFloat(style.fontSize);const lineHeight=parseFloat(style.lineHeight)/fontSize;const nodeRect=[node.parentNode.offsetWidth,node.parentNode.offsetHeight];const textRect=getTextRect(node.innerText,fontSize,font,lineHeight);const paddingRect=getPaddingRect(style);const rowFontSize=fontSize*(nodeRect[0]-paddingRect[0])/textRect[0]*0.90;const colFontSize=fontSize*(nodeRect[1]-paddingRect[1])/textRect[1]*0.90;if(colFontSize<rowFontSize){node.style.fontSize=colFontSize+"px";}else{node.style.fontSize=rowFontSize+"px";}}
 function getRandomInt(min,max){min=Math.ceil(min);max=Math.floor(max);return Math.floor(Math.random()*(max-min)+min);}
-function nextProblem(){let problem=problems[getRandomInt(0,problems.length-1)];if(Math.random()>0.5){left=problem.slice(0,2);right=problem.slice(2,4);}else{left=problem.slice(2,4);right=problem.slice(0,2);}
+function nextProblem(){const searchButton=document.getElementById("searchButton");searchButton.disabled=true;setTimeout(function(){searchButton.disabled=false;},2000);let problem=problems[getRandomInt(0,problems.length-1)];if(Math.random()>0.5){left=problem.slice(0,2);right=problem.slice(2,4);}else{left=problem.slice(2,4);right=problem.slice(0,2);}
 if(Math.random()>0.5){problem=problem.slice(0,2);}else{problem=problem.slice(2,4);}
 const[en,ja]=problem;const input=document.getElementById("cse-search-input-box-id");input.value=ja;answer=en;if(localStorage.getItem("voice")!=0){loopVoice(answer,3);}
 replied=false;}
