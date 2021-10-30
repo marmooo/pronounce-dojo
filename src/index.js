@@ -287,7 +287,8 @@ function countdown() {
 }
 
 function selectReply() {
-  const reply = this.firstElementChild.textContent;
+  const id = this.id.slice(-1)[0];
+  const reply = document.getElementById("en" + id).textContent;
   if (firstRun || replied) {
     loopVoice(reply, 1);
   } else {
