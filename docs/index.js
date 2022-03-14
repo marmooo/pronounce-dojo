@@ -19,7 +19,7 @@ function nextProblem(){const searchButton=document.getElementById("searchButton"
 if(Math.random()>0.5){problem=problem.slice(0,2);}else{problem=problem.slice(2,4);}
 const[en,ja]=problem;const input=document.getElementById("cse-search-input-box-id");input.value=ja;answer=en;if(localStorage.getItem("voice")!=0){loopVoice(answer,3);}
 replied=false;}
-function initProblems(){const grade=document.getElementById("grade").selectedIndex;fetch("data/"+grade+".csv").then((response)=>response.text()).then((csv)=>{problems=[];csv.split("\n").forEach((line)=>{if(!line)return;problems.push(line.split(","));});},);}
+function initProblems(){const grade=document.getElementById("grade").selectedIndex;fetch("data/"+grade+".csv").then((response)=>response.text()).then((csv)=>{problems=[];csv.split("\n").forEach((line)=>{if(!line)return;problems.push(line.split(","));});});}
 initProblems();function searchByGoogle(event){event.preventDefault();const input=document.getElementById("cse-search-input-box-id");const element1=google.search.cse.element.getElement("result1");const element2=google.search.cse.element.getElement("result2");nextProblem();if(input.value==""){element1.clearAllResults();element2.clearAllResults();}else{element1.execute(left[1]);element2.execute(right[1]);}
 if(firstRun){document.getElementById("aa1").remove();document.getElementById("aa2").remove();firstRun=false;}
 document.getElementById("en1").textContent=left[0];document.getElementById("ja1").textContent=left[1];document.getElementById("en2").textContent=right[0];document.getElementById("ja2").textContent=right[1];return false;}

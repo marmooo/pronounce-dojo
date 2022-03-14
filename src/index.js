@@ -204,15 +204,15 @@ function nextProblem() {
 
 function initProblems() {
   const grade = document.getElementById("grade").selectedIndex;
-  fetch("data/" + grade + ".csv").then((response) => response.text()).then(
-    (csv) => {
+  fetch("data/" + grade + ".csv")
+    .then((response) => response.text())
+    .then((csv) => {
       problems = [];
       csv.split("\n").forEach((line) => {
         if (!line) return;
         problems.push(line.split(","));
       });
-    },
-  );
+    });
 }
 initProblems();
 
