@@ -1,4 +1,4 @@
-var CACHE_NAME = '2022-06-02 10:05';
+var CACHE_NAME = "2022-07-22 10:25";
 var urlsToCache = [
   "/pronounce-dojo/",
   "/pronounce-dojo/index.js",

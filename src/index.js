@@ -200,9 +200,7 @@ function nextProblem() {
   const input = document.getElementById("cse-search-input-box-id");
   input.value = ja;
   answer = en;
-  if (localStorage.getItem("voice") != 0) {
-    loopVoice(answer, 3);
-  }
+  loopVoice(answer, 3);
   replied = false;
 }
 
