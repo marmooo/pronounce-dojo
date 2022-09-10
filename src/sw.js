@@ -1,4 +1,4 @@
-var CACHE_NAME = "2022-08-25 00:00";
+var CACHE_NAME = "2022-09-11 08:49";
 var urlsToCache = [
   "/pronounce-dojo/",
   "/pronounce-dojo/index.js",
@@ -13,7 +13,7 @@ var urlsToCache = [
   "/pronounce-dojo/mp3/correct3.mp3",
   "/pronounce-dojo/favicon/favicon.svg",
   "https://marmooo.github.io/fonts/textar-light.woff2",
-  "https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css",
+  "https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css",
   "https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css",
 ];
 
