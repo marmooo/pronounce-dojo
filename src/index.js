@@ -180,7 +180,7 @@ function getRandomInt(min, max) {
 function nextProblem() {
   const searchButton = document.getElementById("searchButton");
   searchButton.disabled = true;
-  setTimeout(function () {
+  setTimeout(() => {
     searchButton.disabled = false;
   }, 2000);
   let problem = problems[getRandomInt(0, problems.length - 1)];
