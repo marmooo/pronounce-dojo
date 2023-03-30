@@ -1,6 +1,7 @@
 const playPanel = document.getElementById("playPanel");
 const countPanel = document.getElementById("countPanel");
 const scorePanel = document.getElementById("scorePanel");
+const searchButton = document.getElementById("searchButton");
 const gameTime = 120;
 let problems = [];
 let left = [];
@@ -194,7 +195,6 @@ function getRandomInt(min, max) {
 }
 
 function nextProblem() {
-  const searchButton = document.getElementById("searchButton");
   searchButton.disabled = true;
   setTimeout(() => {
     searchButton.disabled = false;
@@ -303,9 +303,7 @@ function countdown() {
       playPanel.classList.remove("d-none");
       correctCount = incorrectCount = 0;
       startGameTimer();
-      document.getElementById("searchButton").classList.add(
-        "animate__heartBeat",
-      );
+      searchButton.classList.add("animate__heartBeat");
     }
   }, 1000);
 }
@@ -329,7 +327,7 @@ function selectReply(event) {
     }
     replied = true;
   }
-  document.getElementById("searchButton").classList.add("animate__heartBeat");
+  searchButton.classList.add("animate__heartBeat");
 }
 
 [...document.getElementById("problems").getElementsByClassName("aa")]
@@ -339,12 +337,9 @@ function selectReply(event) {
       resizeFontSize(aa);
     });
   });
-document.getElementById("searchButton").addEventListener(
-  "animationend",
-  (event) => {
-    event.target.classList.remove("animate__heartBeat");
-  },
-);
+searchButton.addEventListener("animationend", (event) => {
+  event.target.classList.remove("animate__heartBeat");
+});
 
 document.getElementById("toggleDarkMode").onclick = toggleDarkMode;
 document.getElementById("restartButton").onclick = countdown;
