@@ -314,8 +314,8 @@ function initTime() {
   document.getElementById("time").textContent = gameTime;
 }
 
-function selectReply() {
-  const id = this.id.slice(-1)[0];
+function selectReply(event) {
+  const id = event.target.id.slice(-1)[0];
   const reply = document.getElementById("en" + id).textContent;
   if (firstRun || replied) {
     loopVoice(reply, 1);
@@ -332,18 +332,17 @@ function selectReply() {
   document.getElementById("searchButton").classList.add("animate__heartBeat");
 }
 
-[...document.getElementById("problems").getElementsByClassName("aa")].forEach(
-  (aa) => {
+[...document.getElementById("problems").getElementsByClassName("aa")]
+  .forEach((aa) => {
     resizeFontSize(aa);
     window.addEventListener("resize", () => {
       resizeFontSize(aa);
     });
-  },
-);
+  });
 document.getElementById("searchButton").addEventListener(
   "animationend",
-  (e) => {
-    e.target.classList.remove("animate__heartBeat");
+  (event) => {
+    event.target.classList.remove("animate__heartBeat");
   },
 );
 
