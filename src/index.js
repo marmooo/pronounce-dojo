@@ -3,6 +3,7 @@ const countPanel = document.getElementById("countPanel");
 const scorePanel = document.getElementById("scorePanel");
 const searchButton = document.getElementById("searchButton");
 const gameTime = 120;
+let gameTimer;
 let problems = [];
 let left = [];
 let right = [];
@@ -260,13 +261,10 @@ function searchByGoogle(event) {
 }
 
 function scoring() {
-  playPanel.classList.add("d-none");
-  scorePanel.classList.remove("d-none");
   document.getElementById("correct").textContent = correctCount;
   document.getElementById("total").textContent = correctCount + incorrectCount;
 }
 
-let gameTimer;
 function startGameTimer() {
   clearInterval(gameTimer);
   const timeNode = document.getElementById("time");
@@ -277,35 +275,39 @@ function startGameTimer() {
     } else {
       clearInterval(gameTimer);
       playAudio("end");
+      playPanel.classList.add("d-none");
+      scorePanel.classList.remove("d-none");
       scoring();
     }
   }, 1000);
 }
 
-let countdownTimer;
 function countdown() {
-  initTime();
-  clearTimeout(countdownTimer);
+  correctCount = incorrectCount = 0;
   countPanel.classList.remove("d-none");
   playPanel.classList.add("d-none");
   scorePanel.classList.add("d-none");
   const counter = document.getElementById("counter");
   counter.textContent = 3;
-  countdownTimer = setInterval(() => {
+  const timer = setInterval(() => {
     const colors = ["skyblue", "greenyellow", "violet", "tomato"];
     if (parseInt(counter.textContent) > 1) {
       const t = parseInt(counter.textContent) - 1;
       counter.style.backgroundColor = colors[t];
       counter.textContent = t;
     } else {
-      clearTimeout(countdownTimer);
+      clearTimeout(timer);
       countPanel.classList.add("d-none");
       playPanel.classList.remove("d-none");
-      correctCount = incorrectCount = 0;
       startGameTimer();
       searchButton.classList.add("animate__heartBeat");
     }
   }, 1000);
+}
+
+function startGame() {
+  initTime();
+  countdown();
 }
 
 function initTime() {
@@ -330,20 +332,20 @@ function selectReply(event) {
   searchButton.classList.add("animate__heartBeat");
 }
 
-[...document.getElementById("problems").getElementsByClassName("aa")]
-  .forEach((aa) => {
+function resizeAA() {
+  aas.forEach((aa) => {
     resizeFontSize(aa);
-    window.addEventListener("resize", () => {
-      resizeFontSize(aa);
-    });
   });
+}
+
+const aas = [...document.getElementById("problems").getElementsByClassName("aa")];
 searchButton.addEventListener("animationend", (event) => {
   event.target.classList.remove("animate__heartBeat");
 });
 
 document.getElementById("toggleDarkMode").onclick = toggleDarkMode;
-document.getElementById("restartButton").onclick = countdown;
-document.getElementById("startButton").onclick = countdown;
+document.getElementById("restartButton").onclick = startGame;
+document.getElementById("startButton").onclick = startGame;
 document.getElementById("respeak").onclick = respeak;
 document.getElementById("cse-search-box-form-id").onsubmit = searchByGoogle;
 document.getElementById("choice1").onclick = selectReply;
@@ -353,3 +355,7 @@ document.addEventListener("click", unlockAudio, {
   once: true,
   useCapture: true,
 });
+document.getElementById("searchButton").addEventListener("click", () => {
+  window.removeEventListener("resize", resizeAA);
+});
+window.addEventListener("resize", resizeAA);
