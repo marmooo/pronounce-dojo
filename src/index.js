@@ -23,17 +23,17 @@ loadConfig();
 
 function loadConfig() {
   if (localStorage.getItem("darkMode") == 1) {
-    document.documentElement.dataset.theme = "dark";
+    document.documentElement.setAttribute("data-bs-theme", "dark");
   }
 }
 
 function toggleDarkMode() {
   if (localStorage.getItem("darkMode") == 1) {
     localStorage.setItem("darkMode", 0);
-    delete document.documentElement.dataset.theme;
+    document.documentElement.setAttribute("data-bs-theme", "light");
   } else {
     localStorage.setItem("darkMode", 1);
-    document.documentElement.dataset.theme = "dark";
+    document.documentElement.setAttribute("data-bs-theme", "dark");
   }
 }
 
@@ -251,6 +251,8 @@ function searchByGoogle(event) {
   if (firstRun) {
     document.getElementById("aa1").remove();
     document.getElementById("aa2").remove();
+    [...document.getElementById("problems").getElementsByClassName("searchResults")]
+      .forEach((node) => node.classList.remove("d-none"));
     firstRun = false;
   }
   document.getElementById("en1").textContent = left[0];

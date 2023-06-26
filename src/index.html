@@ -54,9 +54,9 @@
         font-size:10rem; width:12rem; height:12rem; line-height:12rem; border-radius: 50%;
         background:tomato; margin:auto; }
       .card-header.ruby { padding: 1rem 1.25rem .5rem 1.25rem }
-      html[data-theme="dark"] { filter: invert(1) hue-rotate(180deg); }
-      @-moz-document url-prefix() { html[data-theme="dark"] { background-color:black; } }
-      html[data-theme="dark"] #___gcse_0 img { filter: invert(1) hue-rotate(180deg); }
+      html[data-bs-theme="dark"] canvas { filter: invert(1) hue-rotate(180deg); }
+      html[data-bs-theme="dark"] .searchResults { filter: invert(1) hue-rotate(180deg); }
+      html[data-bs-theme="dark"] .searchResults img { filter: invert(1) hue-rotate(180deg); }
     </style>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css" media="print" onload="this.media='all'">
   </head>
@@ -95,7 +95,7 @@ sudo apt install festival speech-dispatcher-festival</code></pre>
       </div>
       <div id="countPanel" class="text-center d-none notranslate">
         <div id="countdown">
-          <div id="counter">3</div>
+          <div id="counter" class="text-dark"></div>
           <pre class="aa">
 
 .　　三　　　三　　 | |　三　　ｺﾞｰ
@@ -150,11 +150,11 @@ sudo apt install festival speech-dispatcher-festival</code></pre>
             <input type="hidden" value="学校" id="cse-search-input-box-id">
             <input id="searchButton" type="submit" value="これなあに？" class="btn btn-primary btn-lg mx-1">
           </form>
-        </div>
-        <div class="text-center pt-3">
-          <button id="respeak" title="もう一度聴く" class="btn btn-outline-secondary btn-lg ms-1" type="button">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="32" height="32"><path d="M0 0h24v24H0z" fill="none"/><path d="M12 5V1L7 6l5 5V7c3.31 0 6 2.69 6 6s-2.69 6-6 6-6-2.69-6-6H4c0 4.42 3.58 8 8 8s8-3.58 8-8-3.58-8-8-8z"/></svg>
-          </button>
+          <div class="text-center pt-3">
+            <button id="respeak" title="もう一度聴く" class="btn btn-secondary btn-lg" type="button">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="32" height="32" fill="currentColor"><path d="M0 0h24v24H0z" fill="none"/><path d="M12 5V1L7 6l5 5V7c3.31 0 6 2.69 6 6s-2.69 6-6 6-6-2.69-6-6H4c0 4.42 3.58 8 8 8s8-3.58 8-8-3.58-8-8-8z"/></svg>
+            </button>
+          </div>
         </div>
         <div id="problems" class="row text-center">
           <div id="choice1" class="col-sm d-grid gap-2 pt-3 align-items-start">
@@ -173,11 +173,13 @@ sudo apt install festival speech-dispatcher-festival</code></pre>
 　　　|`ー＝===＝一"|
 　　　`ー―――─一'
               </pre>
-              <div class="gcse-searchresults-only"
-                   data-defaultToImageSearch="true"
-                   data-disableWebSearch="true"
-                   data-resultSetSize="small"
-                   data-gname="result1"></div>
+              <div class="searchResults d-none">
+                <div class="gcse-searchresults-only"
+                     data-defaultToImageSearch="true"
+                     data-disableWebSearch="true"
+                     data-resultSetSize="small"
+                     data-gname="result1"></div>
+              </div>
             </div>
           </div>
           <div id="choice2" class="col-sm d-grid gap-2 pt-3 align-items-start">
@@ -198,11 +200,13 @@ sudo apt install festival speech-dispatcher-festival</code></pre>
 ､､しー-Ｊヽ､､､彡 ⌒ ミｗｗｗｗｗｗｗｗｗｗ
 　　　　　　　　 (´･ω･ ).
               </pre>
-              <div class="gcse-searchresults-only"
-                   data-defaultToImageSearch="true"
-                   data-disableWebSearch="true"
-                   data-resultSetSize="small"
-                   data-gname="result2"></div>
+              <div class="searchResults d-none">
+                <div class="gcse-searchresults-only"
+                     data-defaultToImageSearch="true"
+                     data-disableWebSearch="true"
+                     data-resultSetSize="small"
+                     data-gname="result2"></div>
+              </div>
             </div>
           </div>
         </div>
