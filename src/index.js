@@ -324,10 +324,10 @@ function selectReply(event) {
   } else {
     if (answer == reply) {
       correctCount += 1;
-      playAudio("correct");
+      playAudio("correct", 0.3);
     } else {
       incorrectCount += 1;
-      playAudio("incorrect");
+      playAudio("incorrect", 0.3);
     }
     replied = true;
   }
