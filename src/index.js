@@ -14,7 +14,7 @@ let englishVoices = [];
 let correctCount = 0;
 let incorrectCount = 0;
 const tmpCanvas = document.createElement("canvas");
-const audioContext = new AudioContext();
+const audioContext = new globalThis.AudioContext();
 const audioBufferCache = {};
 loadAudio("end", "mp3/end.mp3");
 loadAudio("correct", "mp3/correct3.mp3");
@@ -126,7 +126,7 @@ loadVoices();
 
 function loopVoice(text, n) {
   speechSynthesis.cancel();
-  const msg = new SpeechSynthesisUtterance(text);
+  const msg = new globalThis.SpeechSynthesisUtterance(text);
   msg.voice = englishVoices[Math.floor(Math.random() * englishVoices.length)];
   msg.lang = "en-US";
   for (let i = 0; i < n; i++) {
@@ -251,8 +251,9 @@ function searchByGoogle(event) {
   if (firstRun) {
     document.getElementById("aa1").remove();
     document.getElementById("aa2").remove();
-    [...document.getElementById("problems").getElementsByClassName("searchResults")]
-      .forEach((node) => node.classList.remove("d-none"));
+    const searchResults = document.getElementById("problems")
+      .getElementsByClassName("searchResults");
+    [...searchResults].forEach((node) => node.classList.remove("d-none"));
     firstRun = false;
   }
   document.getElementById("en1").textContent = left[0];
@@ -340,7 +341,9 @@ function resizeAA() {
   });
 }
 
-const aas = [...document.getElementById("problems").getElementsByClassName("aa")];
+const aas = [
+  ...document.getElementById("problems").getElementsByClassName("aa"),
+];
 searchButton.addEventListener("animationend", (event) => {
   event.target.classList.remove("animate__heartBeat");
 });
@@ -358,6 +361,6 @@ document.addEventListener("click", unlockAudio, {
   useCapture: true,
 });
 document.getElementById("searchButton").addEventListener("click", () => {
-  window.removeEventListener("resize", resizeAA);
+  globalThis.removeEventListener("resize", resizeAA);
 });
-window.addEventListener("resize", resizeAA);
+globalThis.addEventListener("resize", resizeAA);

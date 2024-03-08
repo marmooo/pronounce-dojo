@@ -1,4 +1,4 @@
-const CACHE_NAME = "2024-02-25 09:42";
+const CACHE_NAME = "2024-03-08 09:30";
 const urlsToCache = [
   "/pronounce-dojo/",
   "/pronounce-dojo/index.js",
