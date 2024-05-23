@@ -339,7 +339,7 @@ function initTime() {
 }
 
 function selectReply(event) {
-  const id = event.target.id.slice(-1)[0];
+  const id = event.currentTarget.id.slice(-1)[0];
   const reply = document.getElementById("en" + id).textContent;
   if (firstRun || replied) {
     loopVoice(reply, 1);
