@@ -44,10 +44,6 @@ function createAudioContext() {
 }
 
 function unlockAudio() {
-  const uttr = new SpeechSynthesisUtterance("");
-  uttr.lang = "en-US";
-  speechSynthesis.speak(uttr);
-
   if (audioContext) {
     audioContext.resume();
   } else {
@@ -307,6 +303,7 @@ function startGameTimer() {
 }
 
 function countdown() {
+  loopVoice("Ready", 1); // unlock
   correctCount = incorrectCount = 0;
   countPanel.classList.remove("d-none");
   playPanel.classList.add("d-none");
