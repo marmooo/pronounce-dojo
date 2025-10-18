@@ -1,8 +1,12 @@
+import { createWorker } from "https://cdn.jsdelivr.net/npm/emoji-particle@0.0.4/+esm";
+
 const playPanel = document.getElementById("playPanel");
 const countPanel = document.getElementById("countPanel");
 const scorePanel = document.getElementById("scorePanel");
 const searchButton = document.getElementById("searchButton");
 const gameTime = 120;
+const emojiParticle = initEmojiParticle();
+const maxParticleCount = 10;
 let gameTimer;
 let problems = [];
 let left = [];
@@ -11,11 +15,13 @@ let replied = false;
 let answer = "Gopher";
 let firstRun = true;
 let englishVoices = [];
+let consecutiveWins = 0;
 let correctCount = 0;
 let incorrectCount = 0;
 const tmpCanvas = document.createElement("canvas");
 let audioContext;
 const audioBufferCache = {};
+loadVoices();
 loadConfig();
 
 function loadConfig() {
@@ -143,7 +149,6 @@ function loadVoices() {
       .filter((voice) => !jokeVoices.includes(voice.voiceURI));
   });
 }
-loadVoices();
 
 function loopVoice(text, n) {
   speechSynthesis.cancel();
@@ -156,6 +161,30 @@ function loopVoice(text, n) {
 
 function respeak() {
   loopVoice(answer, 1);
+}
+
+function initEmojiParticle() {
+  const canvas = document.createElement("canvas");
+  Object.assign(canvas.style, {
+    position: "fixed",
+    pointerEvents: "none",
+    top: "0px",
+    left: "0px",
+  });
+  canvas.width = document.documentElement.clientWidth;
+  canvas.height = document.documentElement.clientHeight;
+  document.body.appendChild(canvas);
+
+  const offscreen = canvas.transferControlToOffscreen();
+  const worker = createWorker();
+  worker.postMessage({ type: "init", canvas: offscreen }, [offscreen]);
+
+  globalThis.addEventListener("resize", () => {
+    const width = document.documentElement.clientWidth;
+    const height = document.documentElement.clientHeight;
+    worker.postMessage({ type: "resize", width, height });
+  });
+  return { canvas, offscreen, worker };
 }
 
 function resizeFontSize(node) {
@@ -304,7 +333,6 @@ function startGameTimer() {
 
 function countdown() {
   loopVoice("Ready", 1); // unlock
-  correctCount = incorrectCount = 0;
   countPanel.classList.remove("d-none");
   playPanel.classList.add("d-none");
   scorePanel.classList.add("d-none");
@@ -318,6 +346,8 @@ function countdown() {
       counter.textContent = t;
     } else {
       clearTimeout(timer);
+      correctCount = incorrectCount = 0;
+      consecutiveWins = 0;
       countPanel.classList.add("d-none");
       playPanel.classList.remove("d-none");
       startGameTimer();
@@ -343,9 +373,21 @@ function selectReply(event) {
   } else {
     if (answer == reply) {
       correctCount += 1;
+      consecutiveWins += 1;
+      for (let i = 0; i < Math.min(consecutiveWins, maxParticleCount); i++) {
+        emojiParticle.worker.postMessage({
+          type: "spawn",
+          options: {
+            particleType: "popcorn",
+            originX: Math.random() * emojiParticle.canvas.width,
+            originY: Math.random() * emojiParticle.canvas.height,
+          },
+        });
+      }
       playAudio("correct", 0.3);
     } else {
       incorrectCount += 1;
+      consecutiveWins = 0;
       playAudio("incorrect", 0.3);
     }
     replied = true;
