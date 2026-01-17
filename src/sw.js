@@ -19,7 +19,7 @@ async function preCache() {
   const cache = await caches.open(cacheName);
   await Promise.all(
     urlsToCache.map((url) =>
-      cache.add(url).catch((e) => console.warn("Failed to cache", url, e))
+      cache.add(url).catch((err) => console.warn("Failed to cache", url, err))
     ),
   );
   self.skipWaiting();
